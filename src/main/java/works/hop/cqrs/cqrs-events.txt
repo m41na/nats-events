@@ -1,0 +1,48 @@
+Some transactions can be eventually consistent, for instance shopping for items
+
+=> SEARCH_ITEMS_COMMAND (name, description etc)
+
+<= SEARCH_RESULTS_EVENT (list of matched items, ordered by some criteria)
+
+=> GET_ITEM_DETAILS_COMMAND (itemId)
+
+<= ITEM_DETAILS_EVENT (item attributes)
+
+=> PAGINATE_RESULTS_COMMAND (searchItemsCommand, start, limit)
+
+<= SEARCH_RESULTS_EVENT (same as previous)
+
+=> ADD_TO_CART_COMMAND (selected items)
+
+<= CART_UPDATED_EVENT (list of items in cart)
+
+=> REMOVE_FROM_CART (selected items)
+
+<= CART_UPDATED_EVENT (same as previous)
+
+=> CHECKOUT_CART_COMMAND (items for order)
+
+=> CREATE_ORDER_COMMAND (items in cart)
+
+<= CHECK_ITEM_AVAILABILITY_COMMAND (itemId)
+
+<= ITEM_AVAILABILITY_EVENT (itemId, available)
+
+<= ORDER_CREATED_EVENT (orderId, items in order)
+
+<= START_PAYMENT_COMMAND (orderId, total for order)
+
+=> SUBMIT_PAYMENT_COMMAND (orderId, payment amount)
+
+<= PAYMENT_PROCESSED_SUCCESS_EVENT (orderId, paymentId, payment amount)
+
+<= PAYMENT_PROCESSED_FAILURE_EVENT (orderId, payment amount)
+
+<= ORDER_COMPLETED_EVENT (orderId, paymentId, payment amount)
+
+<= ORDER_CANCELLED_EVENT (orderId)
+
+<= UPDATE_INVENTORY_COMMAND (itemId)
+
+<= INVENTORY_UPDATED_EVENT (orderId)
+
